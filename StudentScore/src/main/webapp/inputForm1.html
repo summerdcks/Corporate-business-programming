@@ -1,0 +1,87 @@
+<html> <!--html언어로 작성 시작-->
+<head> <!--머릿말 시작-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<!--html 메타태그: 문서의 문자 인코딩을 utf-8로 설정한다-->
+    <style> /*스타일시트 시작*/
+        table, td { /*table, td태그 셀렉터*/
+            border: 1px double black; /*테두리 1픽셀 두줄 검은색 지정*/
+            text-align: center; /*글자 가운데 정렬*/
+            height: 30px; /*높이 30픽셀*/
+        }
+    </style> <!--스타일시트 끝-->
+</head> <!--머릿말 끝-->
+<body> <!--본문 시작-->
+<script> //자바스크립트 시작
+    function submit1() { //함수 submit1 생성
+        const form = document.getElementById('form_1'); 
+        //id가 form_1인 html요소를 선택하고 변수 form에 할당
+        const username = form.elements.username.value; 
+        //html폼 내의 이름이 username인 입력값을 가져와 변수 username에 할당
+        const korean = parseFloat(form.elements.korean.value); 
+        //html폼 내의 이름이 korean인 입력값을 가져와 실수형변환 후 변수 korean에 할당
+        const english = parseFloat(form.elements.english.value);
+         //html폼 내의 이름이 english인 입력값을 가져와 실수형변환 후 변수 english에 할당
+        const math =  parseFloat(form.elements.math.value);
+         //html폼 내의 이름이 math인 입력값을 가져와 실수형변환 후 변수 math에 할당
+        const pattern1 = /^([a-zA-Z]|[가-힣])+$/; //한글,영어만 입력받는 정규식1 선언
+        const pattern2 = /^.{1,20}$/; //20자 이내만 입력받는 정규식2 선언
+        const pattern3 = /^(?:100|[1-9]?[0-9])$/; //0~100사이의 정수만 입력받는 정규식3 선언
+        if(!pattern1.test(username)) { //username이 정규식1에 부합하지 않으면
+            alert("이름에 한글, 영어를 입력해주세요"); //해당 문구를 알림창에 띄워준다
+        } else if (!pattern2.test(username)) {  //username이 정규식2에 부합하지 않으면
+            alert("이름은 20자 이내로 입력해주세요"); //해당 문구를 알림창에 띄워준다
+        } else if (!pattern3.test(korean) || !pattern3.test(english) || !pattern3.test(math)) {
+            //국어, 영어, 수학점수가 정규식3에 부합하지 않으면
+            alert("유효한 점수를 입력해주세요"); //해당 문구를 알림창에 띄워준다
+        } else { //입력값들이 위의 정규식에 모두 부합하면
+            form.action="insertDB.jsp"; //form의 action 속성을 insertDB.jsp로 지정하고
+            form.submit(); //form데이터를 해당 파일로 제출해준다
+        }
+    }
+    window.onload = function() { //윈도우가 로드될 때 적용되는 함수
+        document.querySelector('input[name="username"]').focus(); 
+        //name이 username인 입력창에 오토포커스가 되도록 함
+    }
+
+</script> <!--자바스크립트 끝-->
+<h1>성적입력추가</h1> <!--표제-->
+    <form method="get" id="form_1">
+    <!--데이터가 HTTP GET 메소드를 사용하여 제출되도록 지정, 양식 필드에 입력된 데이터가 쿼리 매개변수로 URL에 추가된다
+    식별자 "form_1"을 양식 요소에 할당하며 JavaScript 또는 CSS에서 양식을 참조하는 데 사용할 수 있게 한다-->
+	<table style="border: none;"> <!-- 테이블 생성, 테두리 없음 -->
+    	<tr><td style="border: none;"> <!-- 행, 열 시작, 테두리 없음 -->
+    	<div style='width:780px;float: right;'><!-- div 생성, 너비 780픽셀, 오른쪽 유동정렬 -->
+      		<input type="button" value="추가" onclick="submit1()">
+        	<!--클릭버튼을 생성하고 안의 텍스트는 "추가", 클릭하면 submit1함수가 호출된다-->
+        </div> <!-- div끝 -->
+		</td></tr> <!-- 행열 끝 -->
+	</table> <!-- 테이블 끝 -->
+        <table> <!--테이블 생성-->
+            <tr> <!--행 시작-->
+                <td style="width:100px;">이름</td> <!--너비 100픽셀의 셀 지정, 해당 문구 출력-->
+                <td style="width:300px;"><input type="text" name="username" ></td> 
+                <!--너비 300픽셀의 셀 지정, 텍스트를 입력받고 입력받은 값을 username에 지정한다-->
+            </tr> <!--행 끝-->
+            <tr> <!--행 시작-->
+                <td>학번</td> <!--셀 안에 해당문구 출력-->
+                <td>자동부여</td> <!--셀 안에 해당문구 출력-->
+            </tr> <!--행 시작-->
+            <tr> <!--행 끝-->
+                <td>국어</td> <!--셀 안에 해당문구 출력-->
+                <td><input type="number" name="korean" min="0" max="100"></td>
+                 <!--0에서 100 사이의 숫자값을 입력받고 입력받은 값을 korean에 지정한다-->
+            </tr> <!--행 끝-->
+            <tr> <!--행 시작-->
+                <td>영어</td> <!--셀 안에 해당문구 출력-->
+                <td><input type="number" name="english" min="0" max="100"></td>
+                <!--0에서 100 사이의 숫자값을 입력받고 입력받은 값을 english에 지정한다-->
+            </tr> <!--행 끝-->
+            <tr> <!--행 시작-->
+                <td>수학</td> <!--셀 안에 해당문구 출력-->
+                <td><input type="number" name="math" min="0" max="100"></td>
+                <!--0에서 100 사이의 숫자값을 입력받고 입력받은 값을 math에 지정한다-->
+            </tr> <!--행 끝-->   
+        </table> <!--테이블 끝-->
+    </form> <!--form 끝-->
+</body> <!--본문 끝-->
+</html> <!--html언어로 작성 끝-->

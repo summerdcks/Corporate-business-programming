@@ -1,0 +1,17 @@
+<!DOCTYPE html> <!-- 문서형식 html -->
+<html> <!-- html언어로 작성 시작 -->
+<head> <!-- 머릿말 끝 -->
+	<meta http-equiv="Content-Type" content="text/html; charset-utf-8"/>    
+	<!--html 메타태그: 문서의 문자 인코딩을 utf-8로 설정한다-->
+	<title>Student Score</title> <!--타이틀에 새겨질 글자-->
+</head> <!-- 머릿말 끝 -->
+<body> <!-- 본문 시작 -->
+	<div style="display: flex;"> <!--div태그 설정 유연하게 배치, 사용 가능한 공간에 맞게 조정됨-->
+		<iframe src="menu.html" style="display:block; width:200px; height:100vh"></iframe>
+		<!--menu.html파일을 로드함, 블록 요소, 너비 200픽셀, 뷰포트 높이 100%-->
+		<iframe src="intro.jsp" name="content" frameborder="0" style="display:block; width:700px;"></iframe>
+		<!--intro.html파일을 로드함, 해당 페이지를 content라는 이름으로 지정, 
+			테두리 없음, 블록 요소, 너비 700픽셀, 뷰포트 높이 100%-->
+	</div> <!--div태그 끝-->
+</body> <!-- 본문 끝 -->
+</html> <!-- html언어로 작성 끝 -->
